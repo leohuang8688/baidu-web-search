@@ -8,6 +8,23 @@
 
 ---
 
+## 🔐 Required Environment Variables
+
+⚠️ **This skill requires API credentials:**
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `BAIDU_API_KEY` | Baidu Search API key | ✅ Yes |
+
+**Setup:**
+```bash
+export BAIDU_API_KEY="your_baidu_api_key"
+```
+
+**Get API Key:** https://ai.baidu.com/
+
+---
+
 ## ✨ Features
 
 - 🔍 **Baidu Web Search** - 使用百度搜索 API

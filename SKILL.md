@@ -13,6 +13,31 @@
 | **Author** | PocketAI for Leo |
 | **License** | MIT |
 | **Category** | Search |
+| **Required Env Vars** | `BAIDU_API_KEY` |
+
+---
+
+## 🔐 Required Environment Variables
+
+**This skill requires the following environment variables:**
+
+| Variable | Description | Required | How to Get |
+|----------|-------------|----------|------------|
+| `BAIDU_API_KEY` | Baidu Search API key | ✅ Yes | https://ai.baidu.com/ |
+
+**Configuration:**
+```bash
+export BAIDU_API_KEY="your_baidu_api_key"
+```
+
+---
+
+## ✨ Features
+
+- 🔍 **Baidu Web Search** - 使用百度搜索 API 进行网络搜索
+- 🇨🇳 **Chinese Focus** - 专注于中文搜索结果
+- 📊 **Customizable Results** - 可定制返回结果数量
+- 🚀 **Easy Integration** - 易于集成到 OpenClaw
 
 ---
 
