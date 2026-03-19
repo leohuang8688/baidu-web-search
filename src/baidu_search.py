@@ -11,7 +11,6 @@ import json
 from typing import List, Dict, Optional
 from pathlib import Path
 from dotenv import load_dotenv
-from tavily import TavilyClient
 
 # Load environment variables from .env file
 env_path = Path(__file__).parent.parent / '.env'
@@ -80,6 +79,13 @@ class TavilySearch:
         Args:
             api_key: Tavily API key. If None, will try to load from .env or environment.
         """
+        try:
+            from tavily import TavilyClient
+        except ImportError:
+            raise ImportError(
+                "tavily-python is required for Tavily search. "
+                "Install it with: pip install tavily-python"
+            )
         self.api_key = api_key or os.getenv('TAVILY_API_KEY')
         if not self.api_key:
             raise ValueError("Tavily API key is required. Set TAVILY_API_KEY environment variable.")
@@ -144,18 +150,21 @@ def search(query: str, count: int = 10) -> List[Dict]:
 
 def baidu_search(query: str, count: int = 10) -> str:
     """
-    Search the web using Baidu.
-    
+    Search the web using the configured provider (Baidu or Tavily).
+
     Args:
         query: Search query string.
         count: Number of results to return (default: 10).
-        
+
     Returns:
         Formatted search results as string.
     """
     try:
         provider = _get_provider()
-        results = search(query, count)
+        if provider == 'tavily':
+            results = TavilySearch().search(query, count)
+        else:
+            results = BaiduSearch().search(query, count)
 
         if not results:
             return "❌ No results found."
