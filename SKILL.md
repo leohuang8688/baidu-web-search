@@ -13,7 +13,7 @@
 | **Author** | PocketAI for Leo |
 | **License** | MIT |
 | **Category** | Search |
-| **Required Env Vars** | `BAIDU_API_KEY` |
+| **Required Env Vars** | `BAIDU_API_KEY` (or `TAVILY_API_KEY`) |
 
 ---
 
@@ -23,11 +23,22 @@
 
 | Variable | Description | Required | How to Get |
 |----------|-------------|----------|------------|
-| `BAIDU_API_KEY` | Baidu Search API key | ✅ Yes | https://ai.baidu.com/ |
+| `BAIDU_API_KEY` | Baidu Search API key | ✅ Yes (if using Baidu) | https://ai.baidu.com/ |
+| `TAVILY_API_KEY` | Tavily Search API key | ✅ Yes (if using Tavily) | https://app.tavily.com |
+| `SEARCH_PROVIDER` | Search provider selection (`baidu` or `tavily`) | ❌ No | See provider selection below |
+
+**Provider Selection Logic:**
+- If `SEARCH_PROVIDER` is set to `tavily` or `baidu`, that provider is used.
+- If `SEARCH_PROVIDER` is not set, Tavily is used when `TAVILY_API_KEY` is present, otherwise Baidu.
 
 **Configuration:**
 ```bash
+# Baidu (default when no Tavily key is present)
 export BAIDU_API_KEY="your_baidu_api_key"
+
+# Tavily (optional, used when key is present or SEARCH_PROVIDER=tavily)
+export TAVILY_API_KEY="your_tavily_api_key"
+export SEARCH_PROVIDER="tavily"  # optional, auto-detected from API key
 ```
 
 ---
@@ -132,7 +143,9 @@ for result in results:
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `BAIDU_API_KEY` | Baidu Search API key | ✅ Yes |
+| `BAIDU_API_KEY` | Baidu Search API key | ✅ Yes (if using Baidu) |
+| `TAVILY_API_KEY` | Tavily Search API key | ✅ Yes (if using Tavily) |
+| `SEARCH_PROVIDER` | Provider selection (`baidu` or `tavily`) | ❌ No |
 
 ### Getting Baidu API Key
 
@@ -216,10 +229,10 @@ Found 10 results:
 
 ## ⚠️ Limitations
 
-- **API Rate Limits:** Baidu API has rate limits
-- **API Key Required:** Must have valid Baidu API key
-- **Chinese Focus:** Best for Chinese language queries
-- **Regional Restrictions:** May have regional restrictions
+- **API Rate Limits:** Baidu and Tavily APIs have rate limits
+- **API Key Required:** Must have a valid API key for the selected provider
+- **Chinese Focus:** Baidu is best for Chinese language queries; Tavily provides broader multilingual coverage
+- **Regional Restrictions:** Baidu may have regional restrictions
 
 ---
 
